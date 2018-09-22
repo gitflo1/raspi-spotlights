@@ -1,3 +1,7 @@
+Setup:
+- node v8.12.0 and npm v6.4.1
+- "npm i -g typescript" installed
+
 How to compile and start the server:
 
 1. run "npm install" in the root-dir (where the package.json exists)
