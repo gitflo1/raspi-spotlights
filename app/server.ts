@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import { WelcomeController } from './controllers';
 
 const app: express.Application = express();
