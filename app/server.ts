@@ -1,11 +1,7 @@
-import express from 'express';
-import { WelcomeController } from './controllers';
+import app from "./app";
 
-const app: express.Application = express();
-const port: number = 3000;
+const PORT = 3000;
 
-app.use('/welcome', WelcomeController);
-
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}/`);
-});
+app.listen(PORT, () => {
+    console.log('Server is listening to http://localhost:' + PORT);
+})
