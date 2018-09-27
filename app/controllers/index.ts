@@ -1,2 +1,2 @@
 export * from './welcome.controller';
-export * from './motion-detector.controller';
+export * from './relais-controller.controller';
