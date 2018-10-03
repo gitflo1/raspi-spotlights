@@ -1,2 +1,2 @@
 export * from './welcome.controller';
-export * from './relais-controller.controller';
+export * from './settingsController';
