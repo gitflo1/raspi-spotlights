@@ -1,2 +1,2 @@
 export * from './welcome.controller';
-export * from './settingsController';
+export * from './settingController';

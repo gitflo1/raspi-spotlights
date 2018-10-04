@@ -1,9 +1,9 @@
-import { SettingsController } from './../controllers/settingsController';
+import { SettingController } from './../controllers/settingController';
 import { Request, Response } from "express";
 import express from 'express';
 
 export class Routes {
-    public settingsController: SettingsController = new SettingsController();
+    public settingController: SettingController = new SettingController();
 
     public routes(app: express.Application): void {
         app.route('/').get((req: Request, res: Response) => {
@@ -11,6 +11,10 @@ export class Routes {
                 message: 'Hello from base route.'
             })
         })
-        app.route('/settings').post(this.settingsController.addNewSettings);
+
+        app.route('/setting').post(this.settingController.addNewSetting);
+
+        app.route('/setting/:settingId')
     }
+
 }
