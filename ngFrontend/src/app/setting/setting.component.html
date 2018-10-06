@@ -9,14 +9,21 @@
   <mat-card-content>
     <mat-form-field>
       <mat-select placeholder="IntervalTimer">
-        <mat-option *ngFor="let intervalTimer of intervalTimers" [value]="intervalTimer.valueInMs">
-          {{intervalTimer.viewValue}}
+        <mat-option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
+          {{intervalTime.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p></p>
+    <mat-form-field>
+      <mat-select placeholder="ShutdownTimer">
+        <mat-option *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
+          {{shutdownTime.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button>UPDATE SETTINGS</button>
   </mat-card-actions>
 </mat-card>

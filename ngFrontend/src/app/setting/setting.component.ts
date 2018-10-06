@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-export interface IntervalTimer {
+export interface ISettingTime {
   valueInMs: number;
   viewValue: string;
 }
@@ -15,15 +15,26 @@ export interface IntervalTimer {
 })
 export class SettingComponent implements OnInit {
 
-  intervalTimerControl = new FormControl();
-
-  intervalTimers: IntervalTimer[] = [
+  intervalTimes: ISettingTime[] = [
     {valueInMs: 250, viewValue: '0,25 Sekunden'},
     {valueInMs: 250, viewValue: '0,5 Sekunden'},
     {valueInMs: 250, viewValue: '1 Sekunde'},
     {valueInMs: 250, viewValue: '1,5 Sekunden'},
     {valueInMs: 250, viewValue: '2 Sekunden'},
-    {valueInMs: 250, viewValue: '3 Sekunden'},
+    {valueInMs: 250, viewValue: '3 Sekunden'}
+  ];
+
+  shutdownTimes: ISettingTime[] = [
+    {valueInMs: 250, viewValue: '0 Sekunden'},
+    {valueInMs: 250, viewValue: '5 Sekunden'},
+    {valueInMs: 250, viewValue: '10 Sekunde'},
+    {valueInMs: 250, viewValue: '15 Sekunden'},
+    {valueInMs: 250, viewValue: '20 Sekunden'},
+    {valueInMs: 250, viewValue: '30 Sekunden'},
+    {valueInMs: 250, viewValue: '45 Sekunden'},
+    {valueInMs: 250, viewValue: '60 Sekunden'},
+    {valueInMs: 250, viewValue: '120 Sekunden'},
+    {valueInMs: 250, viewValue: '180 Sekunden'}
   ];
 
   restItems: any;
