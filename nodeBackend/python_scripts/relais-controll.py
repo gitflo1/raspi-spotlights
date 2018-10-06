@@ -19,31 +19,23 @@ for i in pinList:
 sleepTime = 2
 
 # start all relais one after another with timer as delay
-def mein_callback(channel):
-    print('Motion detected!')
+def switchOnLights():
+    print("Motion detected!")
     GPIO.output(2, GPIO.LOW)
-    print "ONE"
     time.sleep(sleepTime) 
     GPIO.output(3, GPIO.LOW)
-    print "TWO"
     time.sleep(sleepTime)  
     GPIO.output(4, GPIO.LOW)
-    print "THREE"
     time.sleep(sleepTime)
     GPIO.output(17, GPIO.LOW)
-    print "FOUR"
     time.sleep(sleepTime)
     GPIO.output(27, GPIO.LOW)
-    print "FIVE"
     time.sleep(sleepTime)
     GPIO.output(22, GPIO.LOW)
-    print "SIX"
     time.sleep(sleepTime)
     GPIO.output(10, GPIO.LOW)
-    print "SEVEN"
     time.sleep(sleepTime)
     GPIO.output(9, GPIO.LOW)
-    print "EIGHT"
     time.sleep(sleepTime)
     GPIO.output(2, GPIO.HIGH)
     GPIO.output(3, GPIO.HIGH)
@@ -55,10 +47,14 @@ def mein_callback(channel):
     GPIO.output(9, GPIO.HIGH)
 
 try:
-    GPIO.add_event_detect(motionDetectorPin , GPIO.RISING, callback=mein_callback, bouncetime=16000)
     while True:
-        time.sleep(16000)
+        time.sleep(0.1)
+        currentState = GPIO.input(motionDetectorPin)
+        if currentState == 1:
+            print("Motion detected - switching lights on!")
+            switchOnLights()
 except KeyboardInterrupt:
-    print "KeyBoardInterrupt detected! Stop application!"
-GPIO.cleanup()
-
+    pass
+finally:
+    GPIO.cleanup()
+    print("KeyBoardInterrupt detected! Application stopped!")
