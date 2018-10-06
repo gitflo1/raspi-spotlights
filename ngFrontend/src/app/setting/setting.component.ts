@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 export interface IntervalTimer {
   valueInMs: number;
@@ -24,9 +26,31 @@ export class SettingComponent implements OnInit {
     {valueInMs: 250, viewValue: '3 Sekunden'},
   ];
 
-  constructor() { }
+  restItems: any;
+  restItemsUrl = 'http://localhost:3000/';
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.getRestItems();
+  }
+
+  // Read all REST Items
+  getRestItems(): void {
+    this.restItemsServiceGetRestItems()
+      .subscribe(
+        restItems => {
+          this.restItems = restItems;
+          console.log(this.restItems);
+        }
+      );
+  }
+
+  // Rest Items Service: Read all REST Items
+  restItemsServiceGetRestItems() {
+    return this.http
+      .get<any[]>(this.restItemsUrl)
+      .pipe(map(data => data));
   }
 
 }
