@@ -3,19 +3,17 @@ import Setting from './../models/settingModel';
 
 export class SettingController{
 
-    public addNewSetting(req: Request, res: Response) {
-        let newSetting = new Setting(req.body);
-
-        newSetting.save((err, setting) => {
-            if (err) {
+    public updateSetting(req: Request, res: Response) {
+        Setting.findOneAndUpdate({ _id: 42 }, req.body, { upsert: true, new: true }, (err, setting) => {
+            if(err){
                 res.status(500).send(err);
             }
             res.status(200).json(setting);
-        })
+        });
     }
 
-    public getTimer(req: Request, res: Response) {
-        Setting.findById(req.params.settingId, (err, setting) => {
+    public getSetting(req: Request, res: Response) {
+        Setting.findById(42, (err, setting) => {
             if (err) {
                 res.send(err);
             }

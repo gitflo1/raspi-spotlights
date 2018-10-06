@@ -24,9 +24,8 @@ export class Routes {
             })
         })
 
-        app.route('/setting').post(this.settingController.addNewSetting);
-
-        app.route('/setting/:settingId').get(this.settingController.getTimer);
+        app.route('/setting').put(this.settingController.updateSetting)
+        app.route('/setting').get(this.settingController.getSetting);
     }
 
 }
