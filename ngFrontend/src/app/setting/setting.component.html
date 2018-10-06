@@ -8,7 +8,7 @@
   </mat-card-header>
   <mat-card-content>
     <mat-form-field>
-      <mat-select placeholder="IntervalTimer">
+      <mat-select placeholder="Interval Timer">
         <mat-option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
           {{intervalTime.viewValue}}
         </mat-option>
@@ -16,13 +16,15 @@
     </mat-form-field>
     <p></p>
     <mat-form-field>
-      <mat-select placeholder="ShutdownTimer">
+      <mat-select placeholder="Shutdown Timer">
         <mat-option *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
           {{shutdownTime.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-content>
+  <mat-slide-toggle>Interval active on shutdown</mat-slide-toggle>
+  <mat-slide-toggle>Shutdown on second signal</mat-slide-toggle>
   <mat-card-actions>
     <button mat-button>UPDATE SETTINGS</button>
   </mat-card-actions>
