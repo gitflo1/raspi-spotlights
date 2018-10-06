@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import Setting from './../models/settingModel';
 
 export class SettingController{
