@@ -1,6 +1,6 @@
+import { Http, HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SettingComponent } from './setting/setting.component';
+import { SettingService } from './services/setting.service';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import { SettingComponent } from './setting/setting.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpModule,
     MatCardModule,
     MatSelectModule,
     MatSlideToggleModule
   ],
-  providers: [],
+  providers: [
+    SettingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
