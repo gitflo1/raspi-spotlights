@@ -22,10 +22,11 @@ export class Routes {
             res.status(200).send({
                 message: 'Hello from base route.'
             })
-        })
-
+        });
+        
         app.route('/setting').put(this.settingController.updateSetting)
-        app.route('/setting').get(this.settingController.getSetting);
+        app.route('/setting/:id').get(this.settingController.getOneSetting);
+        app.route('/setting').get(this.settingController.getAllSettings);
     }
 
 }
