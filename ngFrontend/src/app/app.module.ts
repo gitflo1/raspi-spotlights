@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { SettingComponent } from './setting/setting.component';
 import { SettingService } from './services/setting.service';
 import { AppErrorHandler } from './common/app-error-handler';
+import { FormsModule } from '@angular/forms';
+import { Setting } from './setting/setting.model';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { AppErrorHandler } from './common/app-error-handler';
     HttpModule,
     MatCardModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [
     SettingService,
+    Setting,
     // tell Angular to replace its own ErrorHandler with the custom one
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],

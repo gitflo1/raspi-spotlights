@@ -1,8 +1,6 @@
-import { BadInput } from './../common/bad-input';
-import { NotFoundError } from './../common/not-found-error';
-import { AppError } from './../common/app-error';
 import { Component, OnInit, Testability } from '@angular/core';
 import { SettingService } from '../services/setting.service';
+import { Setting } from './setting.model';
 
 export interface ISettingTime {
   valueInMs: number;
@@ -39,16 +37,15 @@ export class SettingComponent implements OnInit {
   ];
 
   restItems: any;
-
   selectedValueInMs = this.shutdownTimes[0].valueInMs;
-  setting: any;
 
-  constructor(private settingsService: SettingService) {}
+  constructor(private settingsService: SettingService, public setting: Setting) {}
 
   ngOnInit() {
     this.settingsService.getOne(42)
       .subscribe((response: Response) => {
-        this.setting = response;
+        console.log(response);
+        this.convertToSetting(response);
         console.log(this.setting);
       });
   }
@@ -56,6 +53,16 @@ export class SettingComponent implements OnInit {
   // Update settings
   updateSettings(setting: HTMLInputElement) {
     this.settingsService.update(setting)
-      .subscribe((response: Response) => this.setting = response);
+      .subscribe((response: Response) => this.convertToSetting(response));
+  }
+
+  convertToSetting(response: any) {
+    this.setting.id = response._id;
+    this.setting.lastUpdated = response.last_updated;
+    this.setting.intervalTime = response.interval_time;
+    this.setting.shutdownTime = response.shutdown_time;
+    this.setting.shutdownOnSecondSignal = response.shutdown_on_second_signal;
+    this.setting.shutdownWithInterval = response.shutdown_with_interval;
   }
 }
+

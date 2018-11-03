@@ -1,5 +1,4 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <mat-card class="example-card">
   <mat-card-header>
@@ -7,25 +6,28 @@
     <mat-card-title style="font-size:20px; font-style:bold">Light Control System</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-select placeholder="Interval Timer">
-        <mat-option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
+    <form class="form-group">
+      <label for="intervalTimeSelector">Interval Timer</label>
+      <select ngModle name="intervalTimeSelector" id="intervalTimeSelector">
+        <option>{{setting.intervalTime}} Sekunden</option>
+        <option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
           {{intervalTime.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <p></p>
-    <mat-form-field>
-      <mat-select placeholder="Shutdown Timer">
-        <mat-option *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
+        </option>
+      </select>
+      <p></p>
+      <label for="shutdownTimeSelector">Shutdown Timer</label>
+      <select ngModle name="shutdownTimeSelector" id="shutdownTimeSelector">
+        <option>{{setting.shutdownTime}} Sekunden</option>
+        <option  *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
           {{shutdownTime.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        </option>
+      </select>
+      <mat-slide-toggle ngModel name = "setting.shutdownWithInterval">Interval active on shutdown</mat-slide-toggle>
+      <mat-slide-toggle ngModel name = "setting.shutdownOnSecondSignal">Shutdown on second signal</mat-slide-toggle>
+      <mat-card-actions>
+        <button mat-button>UPDATE SETTINGS</button>
+      </mat-card-actions>
+    </form>
+
   </mat-card-content>
-  <mat-slide-toggle>Interval active on shutdown</mat-slide-toggle>
-  <mat-slide-toggle>Shutdown on second signal</mat-slide-toggle>
-  <mat-card-actions>
-    <button mat-button>UPDATE SETTINGS</button>
-  </mat-card-actions>
 </mat-card>
