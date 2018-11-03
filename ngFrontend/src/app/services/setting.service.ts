@@ -1,18 +1,10 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class SettingService {
-  private url = 'http://localhost:3000/setting/';
-  constructor(private http: Http) { }
-
-  getSettings() {
-    return this.http.get(this.url);
-  }
-
-  updateSettings(setting) {
-    return this.http.put(this.url + setting.id, JSON.stringify(setting));
+@Injectable()
+export class SettingService extends DataService {
+  constructor(http: Http) {
+    super(http, 'http://localhost:3000/setting/');
   }
 }

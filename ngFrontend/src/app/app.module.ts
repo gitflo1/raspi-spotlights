@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SettingComponent } from './setting/setting.component';
 import { SettingService } from './services/setting.service';
+import { AppErrorHandler } from './common/app-error-handler';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { SettingService } from './services/setting.service';
     MatSlideToggleModule
   ],
   providers: [
-    SettingService
+    SettingService,
+    // tell Angular to replace its own ErrorHandler with the custom one
+    { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

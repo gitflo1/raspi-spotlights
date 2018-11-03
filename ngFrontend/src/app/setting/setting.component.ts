@@ -1,10 +1,8 @@
-import { SettingSchema } from './../../../../nodeBackend/app/models/settingModel';
+import { BadInput } from './../common/bad-input';
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
 import { Component, OnInit, Testability } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
 import { SettingService } from '../services/setting.service';
-import { Response } from 'selenium-webdriver/http';
 
 export interface ISettingTime {
   valueInMs: number;
@@ -45,34 +43,19 @@ export class SettingComponent implements OnInit {
   selectedValueInMs = this.shutdownTimes[0].valueInMs;
   setting: any;
 
-  constructor(private service: SettingService) {}
+  constructor(private settingsService: SettingService) {}
 
   ngOnInit() {
-    this.service.getSettings().subscribe(response => console.log(response.json()));
+    this.settingsService.getOne(42)
+      .subscribe((response: Response) => {
+        this.setting = response;
+        console.log(this.setting);
+      });
   }
 
-  // Post new settings
+  // Update settings
   updateSettings(setting: HTMLInputElement) {
-    this.service.updateSettings(setting).subscribe(response => {
-      console.log(response.json());
-    });
+    this.settingsService.update(setting)
+      .subscribe((response: Response) => this.setting = response);
   }
-
-  // Read all REST Items
-  // getRestItems(): void {
-  //   this.restItemsServiceGetRestItems()
-  //     .subscribe(
-  //       restItems => {
-  //         this.restItems = restItems;
-  //         console.log(this.restItems);
-  //       }
-  //     );
-  // }
-
-  // Rest Items Service: Read all REST Items
-  // restItemsServiceGetRestItems() {
-  //   return this.http
-  //     .get<any[]>(this.restItemsUrl + 'setting')
-  //     .pipe(map(data => data));
-  // }
 }
