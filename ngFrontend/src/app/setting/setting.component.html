@@ -6,28 +6,29 @@
     <mat-card-title style="font-size:20px; font-style:bold">Light Control System</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="form-group">
-      <label for="intervalTimeSelector">Interval Timer</label>
-      <select ngModle name="intervalTimeSelector" id="intervalTimeSelector">
-        <option>{{setting.intervalTime}} Sekunden</option>
-        <option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
-          {{intervalTime.viewValue}}
-        </option>
-      </select>
-      <p></p>
-      <label for="shutdownTimeSelector">Shutdown Timer</label>
-      <select ngModle name="shutdownTimeSelector" id="shutdownTimeSelector">
-        <option>{{setting.shutdownTime}} Sekunden</option>
-        <option  *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
-          {{shutdownTime.viewValue}}
-        </option>
-      </select>
-      <mat-slide-toggle ngModel name = "setting.shutdownWithInterval">Interval active on shutdown</mat-slide-toggle>
-      <mat-slide-toggle ngModel name = "setting.shutdownOnSecondSignal">Shutdown on second signal</mat-slide-toggle>
-      <mat-card-actions>
-        <button mat-button>UPDATE SETTINGS</button>
-      </mat-card-actions>
+    <form #f="ngForm" (ngSubmit)="updateSettings(f.value)">
+      <div>
+        <mat-form-field>
+          <mat-select [(ngModel)]="setting.interval_time" name="interval_time">
+            <mat-option *ngFor="let intervalTime of intervalTimes" [value]="intervalTime.valueInMs">
+              {{intervalTime.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select [(ngModel)]="setting.shutdown_time" name="shutdown_time">
+            <mat-option *ngFor="let shutdownTime of shutdownTimes" [value]="shutdownTime.valueInMs">
+              {{shutdownTime.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-slide-toggle ngModel name="shutdown_with_interval">Interval active on shutdown</mat-slide-toggle>
+      <mat-slide-toggle ngModel name="shutdown_on_second_signal" [checked]="setting.shutdown_on_second_signal">Shutdown on
+        second signal</mat-slide-toggle>
+      <button mat-raised-button>UPDATE SETTINGS</button>
     </form>
-
   </mat-card-content>
 </mat-card>

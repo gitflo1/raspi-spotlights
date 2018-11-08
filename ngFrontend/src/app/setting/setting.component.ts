@@ -1,6 +1,5 @@
 import { Component, OnInit, Testability } from '@angular/core';
-import { SettingService } from '../services/setting.service';
-import { Setting } from './setting.model';
+import { SettingService, Setting } from '../services/setting.service';
 
 export interface ISettingTime {
   valueInMs: number;
@@ -36,33 +35,29 @@ export class SettingComponent implements OnInit {
     {valueInMs: 180000, viewValue: '180 Sekunden'}
   ];
 
-  restItems: any;
   selectedValueInMs = this.shutdownTimes[0].valueInMs;
+  private setting: Setting;
 
-  constructor(private settingsService: SettingService, public setting: Setting) {}
+  constructor(private settingsService: SettingService) {}
 
   ngOnInit() {
     this.settingsService.getOne(42)
-      .subscribe((response: Response) => {
-        console.log(response);
-        this.convertToSetting(response);
-        console.log(this.setting);
-      });
+      .subscribe(
+        (data: Setting) => {
+          this.setting = data;
+          console.log(data);
+        });
   }
 
   // Update settings
-  updateSettings(setting: HTMLInputElement) {
+  updateSettings(setting: Setting) {
+    console.log(setting);
     this.settingsService.update(setting)
-      .subscribe((response: Response) => this.convertToSetting(response));
-  }
-
-  convertToSetting(response: any) {
-    this.setting.id = response._id;
-    this.setting.lastUpdated = response.last_updated;
-    this.setting.intervalTime = response.interval_time;
-    this.setting.shutdownTime = response.shutdown_time;
-    this.setting.shutdownOnSecondSignal = response.shutdown_on_second_signal;
-    this.setting.shutdownWithInterval = response.shutdown_with_interval;
+      .subscribe(
+        (data: Setting) => {
+          this.setting = data;
+          console.log(data);
+      });
   }
 }
 

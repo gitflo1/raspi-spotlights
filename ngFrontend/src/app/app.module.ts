@@ -1,4 +1,3 @@
-import { Http, HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
@@ -11,7 +10,7 @@ import { SettingComponent } from './setting/setting.component';
 import { SettingService } from './services/setting.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { FormsModule } from '@angular/forms';
-import { Setting } from './setting/setting.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { Setting } from './setting/setting.model';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     MatCardModule,
     MatSelectModule,
     MatSlideToggleModule,
@@ -29,7 +28,6 @@ import { Setting } from './setting/setting.model';
   ],
   providers: [
     SettingService,
-    Setting,
     // tell Angular to replace its own ErrorHandler with the custom one
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
