@@ -4,7 +4,7 @@ import Setting from './../models/settingModel';
 export class SettingController{
 
     public updateSetting(req: Request, res: Response) {
-        console.log("Update the settings: " + req.body);
+        console.log("Update the settings: " + JSON.stringify(req.body));
         Setting.findOneAndUpdate({ _id: 42 }, req.body, { upsert: true, new: true }, (err, setting) => {
             if(err){
                 res.status(404).send(err);
