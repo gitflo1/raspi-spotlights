@@ -3,8 +3,6 @@ import { Request, Response } from "express";
 import express from 'express';
 import cors from "cors";
 
-
-
 export class Routes {
     public settingController: SettingController = new SettingController();
 
@@ -23,10 +21,9 @@ export class Routes {
                 message: 'Hello from base route.'
             })
         });
-        
+
         app.route('/setting').put(this.settingController.updateSetting)
         app.route('/setting/:id').get(this.settingController.getOneSetting);
         app.route('/setting').get(this.settingController.getAllSettings);
     }
-
 }
