@@ -36,9 +36,18 @@ export class SettingComponent implements OnInit {
   ];
 
   selectedValueInMs = this.shutdownTimes[0].valueInMs;
-  private setting: Setting;
+  setting: Setting;
 
-  constructor(private settingsService: SettingService) {}
+  constructor(private settingsService: SettingService) {
+    this.setting = {
+      _id: 42,
+      last_updated: Date.now(),
+      interval_time: 0,
+      shutdown_time: 0,
+      shutdown_with_interval: false,
+      shutdown_on_second_signal: false
+    };
+  }
 
   ngOnInit() {
     this.settingsService.getOne(42)

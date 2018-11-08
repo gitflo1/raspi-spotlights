@@ -5,8 +5,9 @@
     <div mat-card-avatar class="material-icons md-48">settings</div>
     <mat-card-title style="font-size:20px; font-style:bold">Light Control System</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <form #f="ngForm" (ngSubmit)="updateSettings(f.value)">
+
+  <form #f="ngForm" (ngSubmit)="updateSettings(f.value)">
+    <mat-card-content>
       <div>
         <mat-form-field>
           <mat-select [(ngModel)]="setting.interval_time" name="interval_time">
@@ -25,10 +26,14 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <mat-slide-toggle ngModel name="shutdown_with_interval">Interval active on shutdown</mat-slide-toggle>
-      <mat-slide-toggle ngModel name="shutdown_on_second_signal" [checked]="setting.shutdown_on_second_signal">Shutdown on
+      <mat-slide-toggle [(ngModel)]="setting.shutdown_with_interval" name="shutdown_with_interval">Interval active on
+        shutdown</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="setting.shutdown_on_second_signal" name="shutdown_on_second_signal">Shutdown on
         second signal</mat-slide-toggle>
-      <button mat-raised-button>UPDATE SETTINGS</button>
-    </form>
-  </mat-card-content>
+      <p></p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button>UPDATE SETTINGS</button>
+    </mat-card-actions>
+  </form>
 </mat-card>
