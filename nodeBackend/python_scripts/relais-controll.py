@@ -21,30 +21,11 @@ sleepTime = 2
 # start all relais one after another with timer as delay
 def switchOnLights():
     print("Motion detected!")
-    GPIO.output(2, GPIO.LOW)
-    time.sleep(sleepTime) 
-    GPIO.output(3, GPIO.LOW)
-    time.sleep(sleepTime)  
-    GPIO.output(4, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(17, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(27, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(22, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(10, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(9, GPIO.LOW)
-    time.sleep(sleepTime)
-    GPIO.output(2, GPIO.HIGH)
-    GPIO.output(3, GPIO.HIGH)
-    GPIO.output(4, GPIO.HIGH)
-    GPIO.output(17, GPIO.HIGH)
-    GPIO.output(27, GPIO.HIGH)
-    GPIO.output(22, GPIO.HIGH)
-    GPIO.output(10, GPIO.HIGH)
-    GPIO.output(9, GPIO.HIGH)
+    for i in pinList:
+        GPIO.output(i, GPIO.LOW) # switch light on at pin i
+        time.sleep(sleepTime)
+    for i in pinList:
+        GPIO.output(i, GPIO.HIGH) # switch light off at pin i
 
 try:
     while True:
