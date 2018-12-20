@@ -1,36 +1,27 @@
 import { Request, Response } from 'express';
-import Setting from './../models/settingModel';
+import fs from 'fs';
 
-export class SettingController{
+export class SettingController {
 
+    static filePath = "./setting.json";
+    
     public updateSetting(req: Request, res: Response) {
         console.log("Update the settings: " + JSON.stringify(req.body));
-        Setting.findOneAndUpdate({ _id: 42 }, req.body, { upsert: true, new: true }, (err, setting) => {
-            if(err){
-                res.status(404).send(err);
-                console.log(console.log(err));
-            }
-            res.status(200).json(setting);
-        });
-    }
-
-    public getAllSettings(req: Request, res: Response) {
-        Setting.find((err, setting) => {
+        fs.writeFile(SettingController.filePath, JSON.stringify(req.body), err => {
             if (err) {
-                res.status(404).send(err);
-                console.log(console.log(err));
+                res.status(500).send(err);
+                console.log(err);
             }
-            res.status(200).send(setting);
         })
     }
 
-    public getOneSetting(req: Request, res: Response) {
-        Setting.findById(req.params.id, (err, setting) => {
+    public getSettings(req: Request, res: Response) {
+        fs.readFile(SettingController.filePath, (err, data) => {
             if (err) {
                 res.status(404).send(err);
-                console.log(console.log(err));
+                console.log(err);
             }
-            res.status(200).send(setting);
+            res.status(200).send(data);
         })
     }
 }

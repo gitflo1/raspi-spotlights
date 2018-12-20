@@ -2,6 +2,7 @@ import { SettingController } from './../controllers/settingController';
 import { Request, Response } from "express";
 import express from 'express';
 import cors from "cors";
+import path from "path";
 
 export class Routes {
     public settingController: SettingController = new SettingController();
@@ -14,16 +15,14 @@ export class Routes {
         };
         
         app.use(cors(options));
+        app.use(express.static(__dirname + '/../../../ngFrontend/dist/ngFrontend'));
         app.route('*').options(cors(options));
 
         app.route('/').get((req: Request, res: Response) => {
-            res.status(200).send({
-                message: 'Hello from base route.'
-            })
+            res.status(200).sendFile(path.join(__dirname, '/../../../dist/ngFrontend'));
         });
 
-        app.route('/setting').put(this.settingController.updateSetting)
-        app.route('/setting/:id').get(this.settingController.getOneSetting);
-        app.route('/setting').get(this.settingController.getAllSettings);
+        app.route('/settings').put(this.settingController.updateSetting);
+        app.route('/settings').get(this.settingController.getSettings);
     }
 }
