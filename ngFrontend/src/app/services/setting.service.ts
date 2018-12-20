@@ -20,20 +20,13 @@ export interface Setting {
   providedIn: 'root'
 })
 export class SettingService {
-  private url = 'http://localhost:3000/setting/';
+  private url = 'http://localhost:3000/settings/';
   private setting: Setting;
 
   constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http.get<Setting>(this.url)
-    .pipe(
-      catchError(error => this.handleError(error))
-    );
-  }
-
-  getOne(id: number) {
-    return this.http.get<Setting>(this.url + id)
     .pipe(
       catchError(error => this.handleError(error))
     );

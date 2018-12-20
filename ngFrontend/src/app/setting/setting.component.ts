@@ -50,7 +50,7 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.settingsService.getOne(42)
+    this.settingsService.getAll()
       .subscribe(
         (data: Setting) => {
           this.setting = data;
